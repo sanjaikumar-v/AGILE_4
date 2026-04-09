@@ -6,7 +6,7 @@ pipeline {
         stage('Containerize') { steps { bat 'docker build -t sanjaikumar1one/agile-app:latest .' } }
         stage('Push & Deploy') { 
             steps { 
-                bat 'docker login -u sanjaikumar1one -p PASTE_YOUR_ACTUAL_TOKEN_HERE'
+                // We removed the raw token to pass GitHub's security check
                 bat 'docker push sanjaikumar1one/agile-app:latest'
                 bat 'docker rm -f agile-running-app || ver > nul'
                 bat 'docker run -d -p 8080:8080 --name agile-running-app sanjaikumar1one/agile-app:latest'
