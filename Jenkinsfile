@@ -6,8 +6,7 @@ pipeline {
         stage('Containerize') { steps { bat 'docker build -t sanjaikumar1one/agile-app:latest .' } }
         stage('Push & Deploy') { 
             steps { 
-                # This ensures Jenkins is logged in before pushing
-                bat 'docker login -u sanjaikumar1one -p YOUR_TOKEN_HERE'
+                bat 'docker login -u sanjaikumar1one -p YOUR_DOCKER_HUB_TOKEN'
                 bat 'docker push sanjaikumar1one/agile-app:latest'
                 bat 'docker rm -f agile-running-app || ver > nul'
                 bat 'docker run -d -p 8080:8080 --name agile-running-app sanjaikumar1one/agile-app:latest'
